@@ -9,8 +9,8 @@ class DatabaseManager:
     
     def load(self):
         """Loads the content into dataframes"""
-        train_dataframe = pd.read_csv(os.path.join(self.directory, 'raw/train.csv'))
-        test_dataframe = pd.read_csv(os.path.join(self.directory, 'raw/test.csv'))
+        train_dataframe = pd.read_csv(os.path.join(self.directory, '../data/raw/train.csv'))
+        test_dataframe = pd.read_csv(os.path.join(self.directory, '../data/raw/test.csv'))
         self.train_dataset = train_dataframe
         self.test_dataset = test_dataframe
     
