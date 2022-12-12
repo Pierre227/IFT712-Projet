@@ -7,8 +7,8 @@ class MLPClassifier:
     
     def __init__(self):
         """Initialize the classifier"""
-        param_grid = {'alpha': 10.0 ** -np.arange(1, 6), #améliorer la grille
-                'hidden_layer_sizes': np.arange(10, 15)}
+        param_grid = {'alpha': 10.0 ** -np.arange(1, 6),
+                'hidden_layer_sizes': [(99,), (99, 99), (99, 99, 99)]}
         self.clf = GridSearchCV(mlp(max_iter=1000), param_grid, cv=3)
 
     def train(self, X, y):

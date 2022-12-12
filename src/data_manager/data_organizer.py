@@ -14,21 +14,17 @@ class DataOrganizer:
     
     def numerize(self, dataset, column):
         """Numerize the attributes of a given column"""
-        values_dict = dict()
-        last_number_used=-1
-        for i, value in enumerate(dataset[column]):
-            numeric_replacement = 0
+        previous_number=-1
+        values = dict()
+        for i, value in enumerate(dataset[column]): #For each value of the selected column
+            new_value = 0
+            if value in values: #If the value is already in the dict
+                new_value = values[value] #Assign the already defined numeric value
+            else: #If the value is not in the dict
+                previous_number += 1
+                # Assign a new numeric value
+                new_value = previous_number
+                values[value] = new_value
 
-            # Check if the dictionnary has the value already.
-            if value in values_dict:
-                numeric_replacement = values_dict[value]
-            else:
-                last_number_used += 1
-                # Set as the numeric replacement for the current string.
-                numeric_replacement = last_number_used
-                # Register in the dictionnary.
-                values_dict[value] = numeric_replacement
-
-            # Replace the string by its numeric value.
-            dataset.loc[i, column] = numeric_replacement
+            dataset.loc[i, column] = new_value
         dataset[column] = dataset[column].astype(int)
