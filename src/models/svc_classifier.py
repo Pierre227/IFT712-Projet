@@ -1,14 +1,14 @@
-from sklearn.linear_model import Perceptron
+from sklearn import svm
 from sklearn.model_selection import GridSearchCV
-import numpy as np
 
-class PerceptronClassifier:
-    """Implementation of Perceptron"""
+class SVCClassifier:
+    """Implementation of SVCClassifier"""
     
     def __init__(self):
         """Initialize the classifier"""
-        param_grid = {'alpha': 10.0 ** -np.arange(1, 6)}
-        self.clf = GridSearchCV(Perceptron(), param_grid, cv=3)
+        param_grid = {'C': [0.1, 1, 10, 100, 1000],
+                    'loss': ['hinge', 'squared_hinge']}
+        self.clf = GridSearchCV(svm.LinearSVC(), param_grid, cv=3)
 
     def train(self, X, y):
         """Training of the classifier"""
@@ -21,7 +21,7 @@ class PerceptronClassifier:
     def score(self, X, y):
         """Score of the classifier"""
         return self.clf.score(X, y)
-    
+
     def get_classifier(self):
         """ Returns the classifier """
         return self.clf
