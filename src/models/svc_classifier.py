@@ -6,9 +6,9 @@ class SVCClassifier:
     
     def __init__(self):
         """Initialize the classifier"""
-        param_grid = {'C': [0.1, 1, 10, 100, 1000],
+        param_grid = {'C': [0.1, 1, 10],
                     'loss': ['hinge', 'squared_hinge']}
-        self.clf = GridSearchCV(svm.LinearSVC(), param_grid, cv=3)
+        self.clf = GridSearchCV(svm.LinearSVC(max_iter=3000), param_grid, cv=3)
 
     def train(self, X, y):
         """Training of the classifier"""
